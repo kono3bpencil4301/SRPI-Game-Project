@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://cm54vapr7r7fp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sdedp"]
+bg_color = Color(0.6, 0.6, 0.6, 0.7529412)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.53333336, 0.8, 1)
+shadow_color = Color(0, 0, 0, 0.3764706)
+shadow_size = 4
+shadow_offset = Vector2(-4, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_if1nw"]
+bg_color = Color(0.6, 0.6, 0.6, 0.7529412)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(5.7756904e-07, 0.9756171, 0.94355696, 1)
+shadow_color = Color(0, 0, 0, 0.3764706)
+shadow_size = 4
+shadow_offset = Vector2(-4, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hrxny"]
+bg_color = Color(0.23921569, 0.23921569, 0.23921569, 0.7529412)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0.53333336, 0.8, 1)
+shadow_color = Color(0, 0, 0, 0.3764706)
+shadow_size = 2
+shadow_offset = Vector2(-4, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wwbf2"]
+bg_color = Color(0.49411765, 0.49411765, 0.49411765, 0.5019608)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0.53333336, 0.8, 1)
+shadow_color = Color(0, 0, 0, 0.3764706)
+shadow_size = 2
+shadow_offset = Vector2(-4, 4)
+
+[sub_resource type="Theme" id="Theme_sdedp"]
+Button/styles/focus = SubResource("StyleBoxFlat_sdedp")
+Button/styles/hover = SubResource("StyleBoxFlat_if1nw")
+Button/styles/normal = SubResource("StyleBoxFlat_hrxny")
+Button/styles/pressed = SubResource("StyleBoxFlat_wwbf2")
+
+[node name="Choice01" type="Button" unique_id=510605147]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 660.0
+offset_top = 270.0
+offset_right = 1260.0
+offset_bottom = 354.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_sdedp")

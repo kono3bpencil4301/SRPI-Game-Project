@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://bqxf3oltixyvq" path="res://Resource/icon.svg" id="1_hrxny"]
 [ext_resource type="PackedScene" uid="uid://cooj5nwjtrgot" path="res://Scenes/AVG_Scenes/DialogueManager.tscn" id="2_wwbf2"]
+[ext_resource type="PackedScene" uid="uid://cm54vapr7r7fp" path="res://Resource/Button/Choice_Button.tscn" id="3_wwbf2"]
+[ext_resource type="Theme" uid="uid://jduc7yo147pf" path="res://Theme/Opinion_Theme.tres" id="4_sdedp"]
 
 [node name="GameSense" type="Node2D" unique_id=707225260]
 
@@ -10,9 +12,44 @@ offset_right = 3840.0
 offset_bottom = 2160.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_hrxny")
+metadata/_edit_lock_ = true
 
-[node name="Dialogue_Box" parent="." unique_id=318538097 instance=ExtResource("2_wwbf2")]
-offset_left = 208.0
-offset_top = 736.0
-offset_right = 208.0
-offset_bottom = 736.0
+[node name="DialogueManager" parent="." unique_id=318538097 node_paths=PackedStringArray("options_container") instance=ExtResource("2_wwbf2")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 960.0
+offset_top = 1080.0
+offset_right = 960.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+options_container = NodePath("../VBoxContainer")
+option_button_scene = ExtResource("3_wwbf2")
+option_button_width = 660.0
+option_button_height = 90.0
+option_button_spacing = 60.0
+option_button_font_size = 36
+json_file_path = "res://Dialogues/main_dialogue.json"
+indent_pixels = 48
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1554399270]
+custom_minimum_size = Vector2(660, 60)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 660.0
+offset_top = 372.0
+offset_right = 1320.0
+offset_bottom = 432.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Choice01" parent="VBoxContainer" unique_id=510605147 instance=ExtResource("3_wwbf2")]
+custom_minimum_size = Vector2(660, 60)
+layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 3
+theme = ExtResource("4_sdedp")
+metadata/_edit_lock_ = true

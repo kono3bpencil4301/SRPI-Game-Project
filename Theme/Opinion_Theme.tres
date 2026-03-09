@@ -1,0 +1,61 @@
+[gd_resource type="Theme" format=3 uid="uid://jduc7yo147pf"]
+
+[ext_resource type="FontFile" uid="uid://b61yc1w1oh1u0" path="res://Resource/Fonts/NotoSansSC-VariableFont_wght.ttf" id="1_hpkey"]
+
+[sub_resource type="FontVariation" id="FontVariation_1jwkr"]
+base_font = ExtResource("1_hpkey")
+variation_opentype = {
+2003265652: 400
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sdedp"]
+bg_color = Color(0.6, 0.6, 0.6, 0.7529412)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0.53333336, 0.8, 1)
+shadow_color = Color(0, 0, 0, 0.3764706)
+shadow_size = 4
+shadow_offset = Vector2(-4, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_if1nw"]
+bg_color = Color(0.6, 0.6, 0.6, 0.7529412)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(5.7756904e-07, 0.9756171, 0.94355696, 1)
+shadow_color = Color(0, 0, 0, 0.3764706)
+shadow_size = 4
+shadow_offset = Vector2(-4, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hrxny"]
+bg_color = Color(0.23921569, 0.23921569, 0.23921569, 0.7529412)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0.53333336, 0.8, 1)
+shadow_color = Color(0, 0, 0, 0.3764706)
+shadow_size = 2
+shadow_offset = Vector2(-4, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wwbf2"]
+bg_color = Color(0.49411765, 0.49411765, 0.49411765, 0.5019608)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0.53333336, 0.8, 1)
+shadow_color = Color(0, 0, 0, 0.3764706)
+shadow_size = 2
+shadow_offset = Vector2(-4, 4)
+
+[resource]
+Button/font_sizes/font_size = 48
+Button/fonts/font = SubResource("FontVariation_1jwkr")
+Button/styles/focus = SubResource("StyleBoxFlat_sdedp")
+Button/styles/hover = SubResource("StyleBoxFlat_if1nw")
+Button/styles/normal = SubResource("StyleBoxFlat_hrxny")
+Button/styles/pressed = SubResource("StyleBoxFlat_wwbf2")

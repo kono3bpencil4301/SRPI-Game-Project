@@ -2,9 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dsyrs5gtbgvei" path="res://Scripts/DialogueManager.cs" id="1_cf7bq"]
 [ext_resource type="Texture2D" uid="uid://d2omvbgjnuf05" path="res://Resource/Line.svg" id="1_j7qik"]
-[ext_resource type="Resource" uid="uid://4rvg4o3ekwdx" path="res://Dialogues/Main_Dialogue.tres" id="2_3lnlx"]
 [ext_resource type="FontFile" uid="uid://dkqu7e4b1tc30" path="res://Resource/Fonts/NotoSerifSC-VariableFont_wght.ttf" id="2_utuju"]
-[ext_resource type="FontFile" uid="uid://b61yc1w1oh1u0" path="res://Resource/Fonts/NotoSansSC-VariableFont_wght.ttf" id="3_mv30t"]
 [ext_resource type="Texture2D" uid="uid://p0oot5715eps" path="res://Resource/Base/Rectangle 1.svg" id="3_wt1jp"]
 [ext_resource type="Texture2D" uid="uid://swda51bw6ki5" path="res://Resource/Base/Rectangle 2.svg" id="4_gta33"]
 [ext_resource type="Texture2D" uid="uid://bqxf3oltixyvq" path="res://Resource/icon.svg" id="7_1ec1f"]
@@ -25,43 +23,37 @@ spacing_glyph = 6
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d71gn"]
 
-[sub_resource type="FontVariation" id="FontVariation_d71gn"]
-base_font = ExtResource("3_mv30t")
-variation_opentype = {
-2003265652: 200
-}
-variation_embolden = 0.3
-spacing_glyph = 3
-
-[sub_resource type="LabelSettings" id="LabelSettings_3lnlx"]
-font = SubResource("FontVariation_d71gn")
-font_size = 20
-shadow_size = 5
-shadow_offset = Vector2(3, 3)
-
-[node name="DialogueManager" type="Control" unique_id=318538097 node_paths=PackedStringArray("character_name_text", "text_box", "role_avatar")]
+[node name="DialogueManager" type="Control" unique_id=318538097 node_paths=PackedStringArray("character_name_text", "text_box", "RichTextBox", "role_avatar")]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -288.0
-offset_bottom = -288.0
+offset_left = 792.0
+offset_right = 792.0
 grow_vertical = 0
 mouse_filter = 1
 script = ExtResource("1_cf7bq")
-character_name_text = NodePath("Control/Texts/Name")
-text_box = NodePath("Control/Texts/HBoxContainer/Content")
-role_avatar = NodePath("Avatar")
-main_dialogue = ExtResource("2_3lnlx")
+character_name_text = NodePath("Control2/Control/Texts/Name")
+text_box = NodePath("")
+RichTextBox = NodePath("Control2/Control/Texts/HBoxContainer/Content")
+role_avatar = NodePath("Control2/Avatar")
+json_file_path = "res://Dialogues/"
 
-[node name="AvatarBase" type="MarginContainer" parent="." unique_id=2074091288]
+[node name="Control2" type="Control" parent="." unique_id=1327132903]
+layout_mode = 1
+anchors_preset = 0
+offset_left = -630.0
+offset_top = -300.0
+offset_right = 630.0
+
+[node name="AvatarBase" type="MarginContainer" parent="Control2" unique_id=2074091288]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 8.0
 offset_right = 328.0
 offset_bottom = 288.0
 
-[node name="Base" type="NinePatchRect" parent="AvatarBase" unique_id=342515838]
+[node name="Base" type="NinePatchRect" parent="Control2/AvatarBase" unique_id=342515838]
 modulate = Color(0.25490198, 0.28627452, 0.31764707, 0.5019608)
 layout_mode = 2
 texture = ExtResource("3_wt1jp")
@@ -74,7 +66,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="Line" type="NinePatchRect" parent="AvatarBase" unique_id=846797761]
+[node name="Line" type="NinePatchRect" parent="Control2/AvatarBase" unique_id=846797761]
 layout_mode = 2
 texture = ExtResource("4_gta33")
 patch_margin_left = 48
@@ -85,7 +77,7 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="Avatar" type="TextureRect" parent="." unique_id=1917783207]
+[node name="Avatar" type="TextureRect" parent="Control2" unique_id=1917783207]
 layout_mode = 0
 offset_left = 40.0
 offset_top = 24.0
@@ -94,18 +86,19 @@ offset_bottom = 536.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_1ec1f")
 
-[node name="Control" type="Control" parent="." unique_id=1300372206]
+[node name="Control" type="Control" parent="Control2" unique_id=1300372206]
 anchors_preset = 0
 offset_left = 328.0
 offset_right = 1228.0
 offset_bottom = 224.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=531973966]
+[node name="MarginContainer" type="MarginContainer" parent="Control2/Control" unique_id=531973966]
 layout_mode = 0
 offset_right = 931.0
 offset_bottom = 288.0
+metadata/_edit_lock_ = true
 
-[node name="Base" type="NinePatchRect" parent="Control/MarginContainer" unique_id=1377950924]
+[node name="Base" type="NinePatchRect" parent="Control2/Control/MarginContainer" unique_id=1377950924]
 modulate = Color(0.25490198, 0.28627452, 0.31764707, 0.5019608)
 self_modulate = Color(1.9754877, 1.9754877, 1.9754877, 0.5019608)
 material = SubResource("CanvasItemMaterial_mv30t")
@@ -121,7 +114,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 metadata/_edit_lock_ = true
 
-[node name="Line" type="NinePatchRect" parent="Control/MarginContainer" unique_id=1857149566]
+[node name="Line" type="NinePatchRect" parent="Control2/Control/MarginContainer" unique_id=1857149566]
 layout_mode = 2
 texture = ExtResource("1_j7qik")
 region_rect = Rect2(0, 0, 689, 248)
@@ -133,36 +126,36 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 metadata/_edit_lock_ = true
 
-[node name="Texts" type="VBoxContainer" parent="Control" unique_id=1339270334]
+[node name="Texts" type="VBoxContainer" parent="Control2/Control" unique_id=1339270334]
 layout_mode = 0
 offset_left = 48.0
 offset_right = 896.0
 offset_bottom = 271.0
 
-[node name="Name" type="Label" parent="Control/Texts" unique_id=553654615]
+[node name="Name" type="Label" parent="Control2/Control/Texts" unique_id=553654615]
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_c7o5j")
 theme_override_font_sizes/font_size = 26
 text = "名字"
 metadata/_edit_lock_ = true
 
-[node name="Panel" type="Panel" parent="Control/Texts" unique_id=850814901]
+[node name="Panel" type="Panel" parent="Control2/Control/Texts" unique_id=850814901]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_d71gn")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/Texts" unique_id=1693415955]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control2/Control/Texts" unique_id=1693415955]
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="Control/Texts/HBoxContainer" unique_id=165564155]
+[node name="Panel" type="Panel" parent="Control2/Control/Texts/HBoxContainer" unique_id=165564155]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_d71gn")
+metadata/_edit_lock_ = true
 
-[node name="Content" type="Label" parent="Control/Texts/HBoxContainer" unique_id=421613721]
+[node name="Content" type="RichTextLabel" parent="Control2/Control/Texts/HBoxContainer" unique_id=1397066178]
 custom_minimum_size = Vector2(600, 210)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "内容"
-label_settings = SubResource("LabelSettings_3lnlx")
-autowrap_mode = 3
+metadata/_edit_lock_ = true
