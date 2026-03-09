@@ -18,7 +18,7 @@ Alpha 0.01-20260309
 - Scripts: 脚本
 - Dialogues: 对话内容
 - Resource: 资源文件
-- Sense: 感知/系统相关内容
+- Sense: 场景相关内容
 
 ## 版权说明
 All rights reserved.
