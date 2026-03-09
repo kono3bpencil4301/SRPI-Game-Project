@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://cooj5nwjtrgot"]
+
+[ext_resource type="Script" uid="uid://dsyrs5gtbgvei" path="res://Scripts/DialogueManager.cs" id="1_cf7bq"]
+[ext_resource type="Texture2D" uid="uid://c2exx4w4lolk8" path="res://Sense/Line.svg" id="1_j7qik"]
+[ext_resource type="Resource" uid="uid://4rvg4o3ekwdx" path="res://Dialogues/Main_Dialogue.tres" id="2_3lnlx"]
+[ext_resource type="FontFile" uid="uid://dkqu7e4b1tc30" path="res://Resource/NotoSerifSC-VariableFont_wght.ttf" id="2_utuju"]
+[ext_resource type="FontFile" uid="uid://b61yc1w1oh1u0" path="res://Resource/NotoSansSC-VariableFont_wght.ttf" id="3_mv30t"]
+[ext_resource type="Texture2D" uid="uid://bt6w8v0yc68s7" path="res://icon.svg" id="7_1ec1f"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mv30t"]
+
+[sub_resource type="Theme" id="Theme_j7qik"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j7qik"]
+load_path = "res://.godot/imported/Box.svg-6e25d6368fe01825fc5e88b23c140d4c.ctex"
+
+[sub_resource type="FontVariation" id="FontVariation_cf7bq"]
+base_font = ExtResource("2_utuju")
+
+[sub_resource type="LabelSettings" id="LabelSettings_cf7bq"]
+font = SubResource("FontVariation_cf7bq")
+font_size = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d71gn"]
+
+[sub_resource type="FontVariation" id="FontVariation_d71gn"]
+base_font = ExtResource("3_mv30t")
+
+[sub_resource type="LabelSettings" id="LabelSettings_3lnlx"]
+font = SubResource("FontVariation_d71gn")
+font_size = 20
+
+[node name="DialogueManager" type="Control" unique_id=318538097 node_paths=PackedStringArray("character_name_text", "text_box", "role_avatar")]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -288.0
+offset_bottom = -288.0
+grow_vertical = 0
+mouse_filter = 1
+script = ExtResource("1_cf7bq")
+character_name_text = NodePath("HBoxContainer/Name")
+text_box = NodePath("HBoxContainer/HBoxContainer/Content")
+role_avatar = NodePath("Avatar")
+main_dialogue = ExtResource("2_3lnlx")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=531973966]
+layout_mode = 0
+offset_right = 1320.0
+offset_bottom = 288.0
+
+[node name="Base" type="TextureRect" parent="MarginContainer" unique_id=207046515]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Base" type="NinePatchRect" parent="MarginContainer/Base" unique_id=1377950924]
+modulate = Color(0.25355393, 0.28603625, 0.3157017, 1)
+material = SubResource("CanvasItemMaterial_mv30t")
+layout_mode = 1
+offset_left = 240.0
+offset_right = 1320.0
+offset_bottom = 288.0
+theme = SubResource("Theme_j7qik")
+texture = SubResource("CompressedTexture2D_j7qik")
+region_rect = Rect2(0, 0, 686, 243)
+patch_margin_left = 510
+patch_margin_top = 81
+patch_margin_right = 421
+patch_margin_bottom = 78
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Line" type="NinePatchRect" parent="MarginContainer/Base" unique_id=1857149566]
+layout_mode = 1
+offset_left = 240.0
+offset_right = 1320.0
+offset_bottom = 288.0
+texture = ExtResource("1_j7qik")
+region_rect = Rect2(0, 0, 689, 248)
+patch_margin_left = 510
+patch_margin_top = 81
+patch_margin_right = 421
+patch_margin_bottom = 78
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="TextArea" type="Control" parent="." unique_id=1427389335]
+anchors_preset = 0
+offset_left = 240.0
+offset_right = 280.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=1339270334]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 8.0
+offset_right = 1248.0
+offset_bottom = 271.0
+
+[node name="Name" type="Label" parent="HBoxContainer" unique_id=553654615]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_cf7bq")
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="HBoxContainer" unique_id=850814901]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_d71gn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=1693415955]
+layout_mode = 2
+
+[node name="Content" type="Label" parent="HBoxContainer/HBoxContainer" unique_id=421613721]
+custom_minimum_size = Vector2(960, 210)
+layout_mode = 2
+size_flags_horizontal = 3
+label_settings = SubResource("LabelSettings_3lnlx")
+autowrap_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="Avatar" type="TextureRect" parent="." unique_id=1917783207]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 240.0
+offset_bottom = 280.0
+texture = ExtResource("7_1ec1f")
+
+[connection signal="gui_input" from="MarginContainer/Base" to="." method="OnClick"]
