@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://butlicd3sawkd"]
+
+[ext_resource type="Texture2D" uid="uid://bqxf3oltixyvq" path="res://Resource/icon.svg" id="1_1dv5p"]
+[ext_resource type="PackedScene" uid="uid://cooj5nwjtrgot" path="res://Scenes/DialogueManager.tscn" id="1_y8m3y"]
+
+[node name="GameSense" type="Node2D" unique_id=707225260]
+
+[node name="Icon" type="TextureRect" parent="." unique_id=907252113]
+offset_right = 3840.0
+offset_bottom = 2160.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_1dv5p")
+
+[node name="Dialogue_Box" parent="." unique_id=318538097 instance=ExtResource("1_y8m3y")]
+offset_left = 208.0
+offset_top = 736.0
+offset_right = 208.0
+offset_bottom = 736.0

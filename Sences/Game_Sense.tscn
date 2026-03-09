@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://butlicd3sawkd"]
-
-[ext_resource type="PackedScene" uid="uid://cooj5nwjtrgot" path="res://Sences/DialogueManager.tscn" id="1_7qhcg"]
-
-[node name="GameSense" type="Node2D" unique_id=707225260]
-
-[node name="Dialogue_Box" parent="." unique_id=318538097 instance=ExtResource("1_7qhcg")]
-offset_top = 792.0
-offset_bottom = 792.0

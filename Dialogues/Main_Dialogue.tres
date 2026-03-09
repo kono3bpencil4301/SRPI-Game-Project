@@ -1,27 +1,27 @@
 [gd_resource type="Resource" script_class="DialogueGroup" format=3 uid="uid://4rvg4o3ekwdx"]
 
 [ext_resource type="Script" uid="uid://b6eluh3vndeee" path="res://Scripts/DialogueLine.cs" id="1_5kcrh"]
-[ext_resource type="Texture2D" uid="uid://bt6w8v0yc68s7" path="res://Resource/icon.svg" id="2_j8ucg"]
+[ext_resource type="Texture2D" uid="uid://bqxf3oltixyvq" path="res://Resource/icon.svg" id="2_j8ucg"]
 [ext_resource type="Script" uid="uid://beeourwls0blh" path="res://Scripts/DialogueGroup.cs" id="3_vyxsa"]
 
 [sub_resource type="Resource" id="Resource_apwd8"]
 script = ExtResource("1_5kcrh")
 CharacterName = "尤娜"
-Content = "这是时隔9年告别英国，前往中国，东边的异国他乡。我记得我10岁到中国游学，不知道将来会在那有什么未知的经历呢？"
+Content = "        这是时隔9年告别英国，前往中国，东边的异国他乡。我记得我10岁到中国游学，不知道将来会在那有什么未知的经历呢？"
 Avatar = ExtResource("2_j8ucg")
 metadata/_custom_type_script = "uid://b6eluh3vndeee"
 
 [sub_resource type="Resource" id="Resource_pa4c6"]
 script = ExtResource("1_5kcrh")
 CharacterName = "男乘客"
-Content = "小心点，你的咖啡撒到了我的衣服上了！"
+Content = "        小心点，你的咖啡撒到了我的衣服上了！"
 Avatar = ExtResource("2_j8ucg")
 metadata/_custom_type_script = "uid://b6eluh3vndeee"
 
 [sub_resource type="Resource" id="Resource_5kcrh"]
 script = ExtResource("1_5kcrh")
 CharacterName = "尤娜"
-Content = "对不起，我会注意的。对了，你是做飞机回到中国吗？"
+Content = "        对不起，我会注意的。对了，你是做飞机回到中国吗？"
 Avatar = ExtResource("2_j8ucg")
 metadata/_custom_type_script = "uid://b6eluh3vndeee"
 

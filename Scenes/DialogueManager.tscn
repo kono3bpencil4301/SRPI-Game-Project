@@ -1,0 +1,168 @@
+[gd_scene format=3 uid="uid://cooj5nwjtrgot"]
+
+[ext_resource type="Script" uid="uid://dsyrs5gtbgvei" path="res://Scripts/DialogueManager.cs" id="1_cf7bq"]
+[ext_resource type="Texture2D" uid="uid://d2omvbgjnuf05" path="res://Resource/Line.svg" id="1_j7qik"]
+[ext_resource type="Resource" uid="uid://4rvg4o3ekwdx" path="res://Dialogues/Main_Dialogue.tres" id="2_3lnlx"]
+[ext_resource type="FontFile" uid="uid://dkqu7e4b1tc30" path="res://Resource/Fonts/NotoSerifSC-VariableFont_wght.ttf" id="2_utuju"]
+[ext_resource type="FontFile" uid="uid://b61yc1w1oh1u0" path="res://Resource/Fonts/NotoSansSC-VariableFont_wght.ttf" id="3_mv30t"]
+[ext_resource type="Texture2D" uid="uid://p0oot5715eps" path="res://Resource/Base/Rectangle 1.svg" id="3_wt1jp"]
+[ext_resource type="Texture2D" uid="uid://swda51bw6ki5" path="res://Resource/Base/Rectangle 2.svg" id="4_gta33"]
+[ext_resource type="Texture2D" uid="uid://bqxf3oltixyvq" path="res://Resource/icon.svg" id="7_1ec1f"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mv30t"]
+
+[sub_resource type="Theme" id="Theme_j7qik"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j7qik"]
+load_path = "res://.godot/imported/Box.svg-6e25d6368fe01825fc5e88b23c140d4c.ctex"
+
+[sub_resource type="FontVariation" id="FontVariation_c7o5j"]
+base_font = ExtResource("2_utuju")
+variation_opentype = {
+2003265652: 865
+}
+spacing_glyph = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d71gn"]
+
+[sub_resource type="FontVariation" id="FontVariation_d71gn"]
+base_font = ExtResource("3_mv30t")
+variation_opentype = {
+2003265652: 200
+}
+variation_embolden = 0.3
+spacing_glyph = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_3lnlx"]
+font = SubResource("FontVariation_d71gn")
+font_size = 20
+shadow_size = 5
+shadow_offset = Vector2(3, 3)
+
+[node name="DialogueManager" type="Control" unique_id=318538097 node_paths=PackedStringArray("character_name_text", "text_box", "role_avatar")]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -288.0
+offset_bottom = -288.0
+grow_vertical = 0
+mouse_filter = 1
+script = ExtResource("1_cf7bq")
+character_name_text = NodePath("Control/Texts/Name")
+text_box = NodePath("Control/Texts/HBoxContainer/Content")
+role_avatar = NodePath("Avatar")
+main_dialogue = ExtResource("2_3lnlx")
+
+[node name="AvatarBase" type="MarginContainer" parent="." unique_id=2074091288]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 328.0
+offset_bottom = 288.0
+
+[node name="Base" type="NinePatchRect" parent="AvatarBase" unique_id=342515838]
+modulate = Color(0.5647059, 0.5647059, 0.5647059, 1)
+layout_mode = 2
+texture = ExtResource("3_wt1jp")
+region_rect = Rect2(10, 0, 320, 320)
+patch_margin_left = 56
+patch_margin_top = 68
+patch_margin_right = 58
+patch_margin_bottom = 64
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Line" type="NinePatchRect" parent="AvatarBase" unique_id=846797761]
+layout_mode = 2
+texture = ExtResource("4_gta33")
+patch_margin_left = 48
+patch_margin_top = 68
+patch_margin_right = 58
+patch_margin_bottom = 64
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Avatar" type="TextureRect" parent="." unique_id=1917783207]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 16.0
+offset_right = 552.0
+offset_bottom = 528.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_1ec1f")
+
+[node name="Control" type="Control" parent="." unique_id=1300372206]
+anchors_preset = 0
+offset_left = 328.0
+offset_right = 1228.0
+offset_bottom = 224.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control" unique_id=531973966]
+layout_mode = 0
+offset_right = 931.0
+offset_bottom = 288.0
+
+[node name="Base" type="NinePatchRect" parent="Control/MarginContainer" unique_id=1377950924]
+modulate = Color(0.25355393, 0.28603625, 0.3157017, 1)
+self_modulate = Color(1.9754877, 1.9754877, 1.9754877, 0.5019608)
+material = SubResource("CanvasItemMaterial_mv30t")
+layout_mode = 2
+theme = SubResource("Theme_j7qik")
+texture = SubResource("CompressedTexture2D_j7qik")
+region_rect = Rect2(0, 0, 686, 243)
+patch_margin_left = 510
+patch_margin_top = 81
+patch_margin_right = 421
+patch_margin_bottom = 78
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+metadata/_edit_lock_ = true
+
+[node name="Line" type="NinePatchRect" parent="Control/MarginContainer" unique_id=1857149566]
+layout_mode = 2
+texture = ExtResource("1_j7qik")
+region_rect = Rect2(0, 0, 689, 248)
+patch_margin_left = 510
+patch_margin_top = 81
+patch_margin_right = 421
+patch_margin_bottom = 78
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+metadata/_edit_lock_ = true
+
+[node name="Texts" type="VBoxContainer" parent="Control" unique_id=1339270334]
+layout_mode = 0
+offset_left = 48.0
+offset_right = 896.0
+offset_bottom = 271.0
+
+[node name="Name" type="Label" parent="Control/Texts" unique_id=553654615]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_c7o5j")
+theme_override_font_sizes/font_size = 26
+text = "名字"
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="Control/Texts" unique_id=850814901]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_d71gn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Texts" unique_id=1693415955]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Control/Texts/HBoxContainer" unique_id=165564155]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_d71gn")
+
+[node name="Content" type="Label" parent="Control/Texts/HBoxContainer" unique_id=421613721]
+custom_minimum_size = Vector2(600, 210)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "内容"
+label_settings = SubResource("LabelSettings_3lnlx")
+autowrap_mode = 1
