@@ -62,7 +62,7 @@ offset_right = 328.0
 offset_bottom = 288.0
 
 [node name="Base" type="NinePatchRect" parent="AvatarBase" unique_id=342515838]
-modulate = Color(0.5647059, 0.5647059, 0.5647059, 1)
+modulate = Color(0.25490198, 0.28627452, 0.31764707, 0.5019608)
 layout_mode = 2
 texture = ExtResource("3_wt1jp")
 region_rect = Rect2(10, 0, 320, 320)
@@ -106,7 +106,7 @@ offset_right = 931.0
 offset_bottom = 288.0
 
 [node name="Base" type="NinePatchRect" parent="Control/MarginContainer" unique_id=1377950924]
-modulate = Color(0.25355393, 0.28603625, 0.3157017, 1)
+modulate = Color(0.25490198, 0.28627452, 0.31764707, 0.5019608)
 self_modulate = Color(1.9754877, 1.9754877, 1.9754877, 0.5019608)
 material = SubResource("CanvasItemMaterial_mv30t")
 layout_mode = 2
@@ -165,4 +165,4 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "内容"
 label_settings = SubResource("LabelSettings_3lnlx")
-autowrap_mode = 1
+autowrap_mode = 3
