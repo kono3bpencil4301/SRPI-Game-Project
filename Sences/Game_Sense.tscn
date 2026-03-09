@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://butlicd3sawkd"]
 
-[ext_resource type="PackedScene" uid="uid://cooj5nwjtrgot" path="res://DialogueManager.tscn" id="1_7qhcg"]
+[ext_resource type="PackedScene" uid="uid://cooj5nwjtrgot" path="res://Sences/DialogueManager.tscn" id="1_7qhcg"]
 
 [node name="GameSense" type="Node2D" unique_id=707225260]
 

@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://cooj5nwjtrgot"]
 
 [ext_resource type="Script" uid="uid://dsyrs5gtbgvei" path="res://Scripts/DialogueManager.cs" id="1_cf7bq"]
-[ext_resource type="Texture2D" uid="uid://c2exx4w4lolk8" path="res://Sense/Line.svg" id="1_j7qik"]
+[ext_resource type="Texture2D" uid="uid://c2exx4w4lolk8" path="res://Resource/Line.svg" id="1_j7qik"]
 [ext_resource type="Resource" uid="uid://4rvg4o3ekwdx" path="res://Dialogues/Main_Dialogue.tres" id="2_3lnlx"]
 [ext_resource type="FontFile" uid="uid://dkqu7e4b1tc30" path="res://Resource/NotoSerifSC-VariableFont_wght.ttf" id="2_utuju"]
 [ext_resource type="FontFile" uid="uid://b61yc1w1oh1u0" path="res://Resource/NotoSansSC-VariableFont_wght.ttf" id="3_mv30t"]
-[ext_resource type="Texture2D" uid="uid://bt6w8v0yc68s7" path="res://icon.svg" id="7_1ec1f"]
+[ext_resource type="Texture2D" uid="uid://bt6w8v0yc68s7" path="res://Resource/icon.svg" id="7_1ec1f"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mv30t"]
 
