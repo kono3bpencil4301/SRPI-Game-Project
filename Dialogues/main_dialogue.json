@@ -1,184 +1,66 @@
 {
-  "dialogue_id": "airplane_encounter",
-  "start_node": "node_1",
-  "nodes": {
-	"node_1": {
-	  "character": "女乘客",
-	  "avatar": "",
-	  "content": "时隔九年，我又一次离开了英国，前往东边的异国他乡——中国。我记得我10岁到中国游学，不知道将来会在那有什么未知的经历呢？",
-	  "next": "node_2"
-	},
-	"node_2": {
-	  "character": "",
-	  "avatar": "",
-	  "content": "（空姐询问是否来点饮料，女乘客向空姐点了杯咖啡）",
-	  "next": "node_3"
-	},
-	"node_3": {
-	  "character": "",
-	  "avatar": "",
-	  "content": "（女乘客的咖啡不小心洒向了旁边男乘客）",
-	  "next": "node_4"
-	},
-	"node_4": {
-	  "character": "罗孟鑫",
-	  "avatar": "",
-	  "content": "小心点，你的咖啡撒到了我的衣服上了！",
-	  "next": "node_5"
-	},
-	"node_5": {
-	  "character": "女乘客",
-	  "avatar": "",
-	  "content": "对不起，我会注意的。对了，你是坐飞机回到中国吗？",
-	  "next": "node_6"
-	},
-	"node_6": {
-	  "character": "罗孟鑫",
-	  "avatar": "",
-	  "content": "是的，我来英国，就是来朝拜英国的摇滚音乐文化的。",
-	  "next": null,
-	  "options": [
-		{
-		  "text": "A：咨询女乘客爱好",
-		  "next": "node_6a"
-		},
-		{
-		  "text": "B：了解其他流派",
-		  "next": "node_6b"
-		}
-	  ]
-	},
-	"node_6a": {
-	  "character": "罗孟鑫",
-	  "avatar": "",
-	  "content": "我估计你也喜欢摇滚音乐吧？",
-	  "next": "node_7"
-	},
-	"node_7": {
-	  "character": "女乘客",
-	  "avatar": "",
-	  "content": "是的，我也很喜欢摇滚音乐，像是Oasis、Blur、Radiohead等等。但这些音乐都是我爸那辈人听的，我喜欢听新一点的流派。",
-	  "next": "node_8"
-	},
-	"node_8": {
-	  "character": "女乘客",
-	  "avatar": "",
-	  "content": "像我最喜欢的流派就是电子舞曲了，像是Drum and Bass、Dubstep、Garage等等。",
-	  "next": "node_9"
-	},
-	"node_9": {
-	  "character": "女乘客",
-	  "avatar": "",
-	  "content": "不过众多电子舞曲当中，我还是更喜欢诞生自我老家的音乐流派。",
-	  "next": "node_14"
-	},
-	"node_6b": {
-	  "character": "罗孟鑫",
-	  "avatar": "",
-	  "content": "你们英国乐队除了摇滚，还有其他流派的音乐吗？",
-	  "next": "node_10"
-	},
-	"node_10": {
-	  "character": "女乘客",
-	  "avatar": "",
-	  "content": "当然有啊，我们英国的电子舞曲音乐也很有名的，像是Drum and Bass、Dubstep、Garage等等。",
-	  "next": "node_11"
-	},
-	"node_11": {
-	  "character": "女乘客",
-	  "avatar": "",
-	  "content": "不过啊，最让我骄傲的是诞生自我老家的音乐流派。",
-	  "next": "node_14"
-	},
-	"node_14": {
-	  "character": "罗孟鑫",
-	  "avatar": "",
-	  "content": "噢，说来听听。",
-	  "next": "node_15"
-	},
-	"node_15": {
-	  "character": "女乘客",
-	  "avatar": "",
-	  "content": "其实，我们老家——布里斯托尔最经典的流派，是Trip Hop风格，简而言之是吸纳了Hip Hop采样和电子音乐的流派。",
-	  "next": "node_16"
-	},
-	"node_16": {
-	  "character": "女乘客",
-	  "avatar": "",
-	  "content": "此外还有Breakbeat流派，小时候我父亲唱片店里收藏了很多Trip Hop和Breakbeat的唱片，我也就从小听到大了。",
-	  "next": "node_17"
-	},
-	"node_17": {
-	  "character": "罗孟鑫",
-	  "avatar": "",
-	  "content": "噢，原来除了摇滚，英国还有这些流派啊，那能不能介绍具体的流派给我认识一下？",
-	  "next": "node_18"
-	},
-	"node_18": {
-	  "character": "罗孟鑫",
-	  "avatar": "",
-	  "content": "（后来我们聊了很久的音乐，从摇滚聊到DNB再到Dubstep音乐，再聊到Grime和Garage音乐，最后聊到Breakbeat和Trip Hop音乐）",
-	  "next": "node_19"
-	},
-	"node_19": {
-	  "character": "女乘客",
-	  "avatar": "",
-	  "content": "那你是出于什么热情，去了解这么多音乐呢？",
-	  "next": "node_20"
-	},
-	"node_20": {
-	  "character": "罗孟鑫",
-	  "avatar": "",
-	  "content": "我其实是来自中国的一个摇滚乐队的队长，身份是主唱以及主吉他手，但我左手受伤了，于是我只能宣告乐队解散，唉。",
-	  "next": "node_21"
-	},
-	"node_21": {
-	  "character": "女乘客",
-	  "avatar": "",
-	  "content": "嗯，那你对中国的摇滚音乐和电子舞曲音乐倒是很了解啊。",
-	  "next": "node_22"
-	},
-	"node_22": {
-	  "character": "罗孟鑫",
-	  "avatar": "",
-	  "content": "是啊，我也在悲叹，中国现在的音乐市场，只能说还不成熟，乐队演出，没有圈外的人去买门票，出专辑又没有很好的发行渠道。我倒好奇，你是怎么了解这么多的音乐知识呢？",
-	  "next": "node_23"
-	},
-	"node_23": {
-	  "character": "尤娜",
-	  "avatar": "",
-	  "content": "我？我叫尤娜，在一个音乐氛围浓厚的家庭中成长，父亲是唱片店老板，而母亲是歌剧院的演员，我现在要去上海的一所大学进修新闻学。那你叫什么名字呢？",
-	  "next": "node_24"
-	},
-	"node_24": {
-	  "character": "罗孟鑫",
-	  "avatar": "",
-	  "content": "我叫罗孟鑫，来自四川，现在乐队解散后，我在磁核市定居下来，准备我的电子信息工程领域的硕士学术之路了。",
-	  "next": "node_25"
-	},
-	"node_25": {
-	  "character": "尤娜",
-	  "avatar": "",
-	  "content": "嗯。我也是去往磁核市进行研学，我们很快就要降落了，能不能加个C讯，以后有机会一起去听音乐会啊？",
-	  "next": "node_26"
-	},
-	"node_26": {
-	  "character": "旁白",
-	  "avatar": "",
-	  "content": "（此时飞机即将降落，发出轰轰隆隆的声音）",
-	  "next": "node_27"
-	},
-	"node_27": {
-	  "character": "罗孟鑫",
-	  "avatar": "",
-	  "content": "（掏出笔和纸，写了一串数字给尤娜）这是我C讯的联系方式。以后有空可以与我联系哈！音乐的姻缘还会继续，我们还是有缘再见的。",
-	  "next": "node_28"
-	},
-	"node_28": {
-	  "character": "尤娜",
-	  "avatar": "",
-	  "content": "好的，愿音乐与你同在。",
-	  "next": null
+  "scenes": [
+	{
+	  "scene_id": "scene_1",
+	  "scene_name": "飞机场景",
+	  "bg_path": "res://Resource/Background/Airplane.png",
+	  "bgm_path": "res://Resource/BGM/Airplane.mp3",
+	  "description": "在飞机上发生的初次相遇"
 	}
-  }
+  ],
+  "events": [
+	{
+	  "event_id": "event_1",
+	  "scene_id": "scene_1",
+	  "event_name": "飞机相遇",
+	  "trigger_type": "auto",
+	  "trigger_condition": "",
+	  "start_dialogue_id": "dialogue_1",
+	  "priority": 1
+	}
+  ],
+  "dialogues": [
+	{
+	  "dialogue_id": "dialogue_1",
+	  "event_id": "event_1",
+	  "dialogue_name": "飞机上的初次对话",
+	  "start_node_id": "node_1",
+	  "end_type": "end"
+	}
+  ],
+  "nodes": [
+	{"node_id": "node_1", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "女乘客", "avatar": "res://Resource/Role_Avatar/Yuna_Default.png", "content": "时隔九年，我又一次离开了英国，前往东边的异国他乡——中国。我记得我10岁到中国游学，不知道将来会在那有什么未知的经历呢？", "next_node_id": "node_2", "has_options": false},
+	{"node_id": "node_2", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "", "avatar": "NULL", "content": "（空姐询问是否来点饮料，女乘客向空姐点了杯咖啡）", "next_node_id": "node_3", "has_options": false},
+	{"node_id": "node_3", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "", "avatar": "NULL", "content": "（女乘客的咖啡不小心洒向了旁边男乘客）", "next_node_id": "node_4", "has_options": false},
+	{"node_id": "node_4", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "罗孟鑫", "avatar": "res://Resource/Role_Avatar/LMX_Frown.png", "content": "小心点，你的咖啡撒到了我的衣服上了！", "next_node_id": "node_5", "has_options": false},
+	{"node_id": "node_5", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "女乘客", "avatar": "res://Resource/Role_Avatar/Yuna_Flustered.png", "content": "对不起，下次我会注意的。", "next_node_id": "node_6", "has_options": false},
+	{"node_id": "node_6", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "女乘客", "avatar": "res://Resource/Role_Avatar/Yuna_Default.png", "content": "（打量罗孟鑫）对了，你是乘坐飞机回到中国吗？", "next_node_id": "node_7", "has_options": false},
+	{"node_id": "node_7", "dialogue_id": "dialogue_1", "node_type": "branch", "speaker": "罗孟鑫", "avatar": "res://Resource/Role_Avatar/LMX_Default.png", "content": "是的，我来英国，就是来朝拜英国的摇滚音乐文化的。", "next_node_id": null, "has_options": true},
+	{"node_id": "node_8", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "罗孟鑫", "avatar": "res://Resource/Role_Avatar/LMX_Earnest.png", "content": "我估计你也喜欢摇滚音乐吧？", "next_node_id": "node_9", "has_options": false},
+	{"node_id": "node_9", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "女乘客", "avatar": "res://Resource/Role_Avatar/Yuna_Default.png", "content": "是的，我也很喜欢摇滚音乐，像是Oasis、Blur、Radiohead等等。但这些音乐都是我爸那辈人听的，我喜欢听新一点的流派。", "next_node_id": "node_10", "has_options": false},
+	{"node_id": "node_10", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "女乘客", "avatar": "res://Resource/Role_Avatar/Yuna_Smile.png", "content": "像我最喜欢的流派就是电子舞曲了，像是Drum and Bass、Dubstep、Garage等等。", "next_node_id": "node_11", "has_options": false},
+	{"node_id": "node_11", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "女乘客", "avatar": "res://Resource/Role_Avatar/Yuna_Excited.png", "content": "不过众多电子舞曲当中，我还是更喜欢诞生自我老家的音乐流派。", "next_node_id": "node_15", "has_options": false},
+	{"node_id": "node_12", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "罗孟鑫", "avatar": "res://Resource/Role_Avatar/LMX_Default.png", "content": "你们英国乐队除了摇滚，还有其他流派的音乐吗？", "next_node_id": "node_13", "has_options": false},
+	{"node_id": "node_13", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "女乘客", "avatar": "res://Resource/Role_Avatar/Yuna_Smile.png", "content": "当然有啊，我们英国的电子舞曲音乐也很有名的，像是Drum and Bass、Dubstep、Garage等等。", "next_node_id": "node_14", "has_options": false},
+	{"node_id": "node_14", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "女乘客", "avatar": "res://Resource/Role_Avatar/LMX_Default.png", "content": "不过啊，最让我骄傲的是诞生自我老家的音乐流派。", "next_node_id": "node_15", "has_options": false},
+	{"node_id": "node_15", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "罗孟鑫", "avatar": "res://Resource/Role_Avatar/LMX_Earnest.png", "content": "噢，说来听听。", "next_node_id": "node_16", "has_options": false},
+	{"node_id": "node_16", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "女乘客", "avatar": "res://Resource/Role_Avatar/Yuna_Default.png", "content": "其实，我们老家——布里斯托尔最经典的流派，是Trip Hop风格，简而言之是吸纳了Hip Hop采样和电子音乐的流派。", "next_node_id": "node_17", "has_options": false},
+	{"node_id": "node_17", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "女乘客", "avatar": "res://Resource/Role_Avatar/Yuna_Default.png", "content": "此外还有Breakbeat流派，小时候我父亲唱片店里收藏了很多Trip Hop和Breakbeat的唱片，我也就从小听到大了。", "next_node_id": "node_18", "has_options": false},
+	{"node_id": "node_18", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "罗孟鑫", "avatar": "res://Resource/Role_Avatar/LMX_Earnest.png", "content": "噢，原来除了摇滚，英国还有这些流派啊，那能不能介绍具体的流派给我认识一下？", "next_node_id": "node_19", "has_options": false},
+	{"node_id": "node_19", "dialogue_id": "dialogue_1", "node_type": "narration", "speaker": "", "avatar": "NULL", "content": "（后来我们聊了很久的音乐，从摇滚聊到DNB再到Dubstep音乐，再聊到Grime和Garage音乐，最后聊到Breakbeat和Trip Hop音乐）", "next_node_id": "node_20", "has_options": false},
+	{"node_id": "node_20", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "女乘客", "avatar": "res://Resource/Role_Avatar/Yuna_Default.png", "content": "那你是出于什么热情，去了解这么多音乐呢？", "next_node_id": "node_21", "has_options": false},
+	{"node_id": "node_21", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "罗孟鑫", "avatar": "res://Resource/Role_Avatar/LMX_Frown.png", "content": "我其实是来自中国的一个摇滚乐队的队长，身份是主唱以及主吉他手，但我左手受伤了，于是我只能宣告乐队解散，唉。", "next_node_id": "node_22", "has_options": false},
+	{"node_id": "node_22", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "女乘客", "avatar": "res://Resource/Role_Avatar/Yuna_Smile.png", "content": "嗯，那你对中国的摇滚音乐和电子舞曲音乐倒是很了解啊。", "next_node_id": "node_23", "has_options": false},
+	{"node_id": "node_23", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "罗孟鑫", "avatar": "res://Resource/Role_Avatar/LMX_Frown.png", "content": "是啊，我也在悲叹，中国现在的音乐市场，只能说还不成熟，乐队演出，没有圈外的人去买门票，出专辑又没有很好的发行渠道。我倒好奇，你是怎么了解这么多的音乐知识呢？", "next_node_id": "node_24", "has_options": false},
+	{"node_id": "node_24", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "尤娜", "avatar": "res://Resource/Role_Avatar/Yuna_Default.png", "content": "我？我叫尤娜，在一个音乐氛围浓厚的家庭中成长，父亲是唱片店老板，而母亲是歌剧院的演员，我现在要去磁核市的一所大学进修新闻学。那你叫什么名字呢？", "next_node_id": "node_25", "has_options": false},
+	{"node_id": "node_25", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "罗孟鑫", "avatar": "res://Resource/Role_Avatar/LMX_Default.png", "content": "我叫罗孟鑫，来自四川，现在乐队解散后，我在磁核市考上了研究生下来，准备我的电子信息工程领域的硕士学术之路了。", "next_node_id": "node_26", "has_options": false},
+	{"node_id": "node_26", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "尤娜", "avatar": "res://Resource/Role_Avatar/Yuna_Smile.png", "content": "嗯。我也是去往磁核市进行研学，我们很快就要降落了，能不能加个C讯，以后有机会一起去听音乐会啊？", "next_node_id": "node_27", "has_options": false},
+	{"node_id": "node_27", "dialogue_id": "dialogue_1", "node_type": "narration", "speaker": "", "avatar": "NULL", "content": "（此时飞机即将降落，发出轰轰隆隆的声音）", "next_node_id": "node_28", "has_options": false},
+	{"node_id": "node_28", "dialogue_id": "dialogue_1", "node_type": "normal", "speaker": "罗孟鑫", "avatar": "res://Resource/Role_Avatar/LMX_Default.png", "content": "好的，（掏出笔和纸，写了一串数字给尤娜）这是我C讯的联系方式。以后有空可以与我联系哈！音乐的姻缘还会继续，我们还是有缘再见的。", "next_node_id": "node_29", "has_options": false},
+	{"node_id": "node_29", "dialogue_id": "dialogue_1", "node_type": "end", "speaker": "尤娜", "avatar": "res://Resource/Role_Avatar/Yuna_Smile.png", "content": "好的，愿音乐与你同在。", "next_node_id": null, "has_options": false}
+  ],
+  "options": [
+	{"option_id": 1, "branch_node_id": "node_7", "option_index": 0, "text": "A：咨询女乘客爱好", "next_node_id": "node_8", "condition": "", "effect": ""},
+	{"option_id": 2, "branch_node_id": "node_7", "option_index": 1, "text": "B：了解其他流派", "next_node_id": "node_12", "condition": "", "effect": ""}
+  ]
 }

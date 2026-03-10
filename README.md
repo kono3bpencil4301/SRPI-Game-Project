@@ -7,7 +7,7 @@ Alpha 0.01.20260309
 
 ## 技术栈
 - Godot（Godot_v4.6.1-stable_mono_win64）
-- C#（.NET SDK 10.0）
+- C#（.NET SDK 9.0）
 - Git / GitHub
 
 ## 当前状态
@@ -19,6 +19,7 @@ Alpha 0.01.20260309
 - Dialogues: 对话内容
 - Resource: 资源文件
 - Scenes: 场景相关内容
+- Theme：美术UI的相关主题
 
 ## 版权说明
 All rights reserved.

@@ -23,7 +23,7 @@ spacing_glyph = 6
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d71gn"]
 
-[node name="DialogueManager" type="Control" unique_id=318538097 node_paths=PackedStringArray("character_name_text", "text_box", "RichTextBox", "role_avatar")]
+[node name="DialogueManager" type="Control" unique_id=318538097 node_paths=PackedStringArray("character_name_text", "RichTextBox", "role_avatar")]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
@@ -34,7 +34,6 @@ grow_vertical = 0
 mouse_filter = 1
 script = ExtResource("1_cf7bq")
 character_name_text = NodePath("Control2/Control/Texts/Name")
-text_box = NodePath("")
 RichTextBox = NodePath("Control2/Control/Texts/HBoxContainer/Content")
 role_avatar = NodePath("Control2/Avatar")
 json_file_path = "res://Dialogues/"
@@ -79,10 +78,10 @@ metadata/_edit_lock_ = true
 
 [node name="Avatar" type="TextureRect" parent="Control2" unique_id=1917783207]
 layout_mode = 0
-offset_left = 40.0
-offset_top = 24.0
-offset_right = 552.0
-offset_bottom = 536.0
+offset_left = 42.0
+offset_top = 18.0
+offset_right = 554.0
+offset_bottom = 530.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_1ec1f")
 

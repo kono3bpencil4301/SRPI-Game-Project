@@ -4,32 +4,6 @@ using Godot;
 
 namespace SRPI
 {
-    // JSON 对话节点结构
-    public class DialogueNodeJson
-    {
-        public string Character { get; set; } = "";
-        public string Avatar { get; set; } = "";
-        public string Content { get; set; } = "";
-        public string Next { get; set; }
-        public List<DialogueOptionJson> Options { get; set; }
-    }
-
-    // JSON 选项结构
-    public class DialogueOptionJson
-    {
-        public string Text { get; set; } = "";
-        public string Opinion { get; set; } = "";
-        public string Next { get; set; } = "";
-    }
-
-    // JSON 对话文件根结构
-    public class DialogueJson
-    {
-        public string DialogueId { get; set; } = "";
-        public string StartNode { get; set; } = "";
-        public Dictionary<string, DialogueNodeJson> Nodes { get; set; }
-    }
-
     [GlobalClass]
     public partial class DialogueManager : Control
     {
@@ -59,21 +33,24 @@ namespace SRPI
         // 内部状态
         private Tween typing_tween;
         private bool is_typing = false;
+
+        // 数据格式枚举
+        private enum DataFormat { FiveLayer, Flat, Old }
+        private DataFormat current_format = DataFormat.FiveLayer;
+
+        // 数据引用
+        private FiveLayerData five_layer_data;
+        private DialogueData current_dialogue;
         private DialogueJson json_data;
+        private FlatDialogueJson flat_json_data;
         private string current_node_id = "";
         private bool has_options = false;
 
         public override void _Ready()
         {
             SetProcessInput(true);
-
-            // 判断使用哪种模式
             if (!string.IsNullOrEmpty(json_file_path))
-            {
                 LoadJsonDialogue();
-            }
-
-            // 延迟一帧调用，确保子节点已准备好
             CallDeferred(nameof(DisplayNextDialogue));
         }
 
@@ -91,7 +68,6 @@ namespace SRPI
                 using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
                 string json_text = file.GetAsText();
 
-                // 使用 Godot JSON 解析
                 var parser = new Json();
                 Error error = parser.Parse(json_text);
                 if (error != Error.Ok)
@@ -107,15 +83,28 @@ namespace SRPI
                     return;
                 }
 
-                json_data = ParseDialogueJson(rawData);
-                if (json_data == null || json_data.Nodes == null)
+                // 检测 JSON 格式并解析
+                if (rawData.ContainsKey("scenes"))
                 {
-                    GD.PrintErr("DialogueManager: Failed to parse JSON");
-                    return;
+                    five_layer_data = DialogueJsonParser.ParseFiveLayerJson(rawData);
+                    current_format = DataFormat.FiveLayer;
+                    InitFirstDialogue(five_layer_data?.Dialogues);
+                    GD.Print($"DialogueManager: Loaded five-layer dialogue: {current_dialogue?.DialogueId}");
                 }
-
-                current_node_id = json_data.StartNode;
-                GD.Print($"DialogueManager: Loaded JSON dialogue: {json_data.DialogueId}");
+                else if (rawData.ContainsKey("dialogue_nodes"))
+                {
+                    flat_json_data = DialogueJsonParser.ParseFlatDialogueJson(rawData);
+                    current_format = DataFormat.Flat;
+                    current_node_id = flat_json_data.Dialogues[0].StartNode;
+                    GD.Print($"DialogueManager: Loaded flat JSON dialogue: {flat_json_data.Dialogues[0].DialogueId}");
+                }
+                else
+                {
+                    json_data = DialogueJsonParser.ParseDialogueJson(rawData);
+                    current_format = DataFormat.Old;
+                    current_node_id = json_data.StartNode;
+                    GD.Print($"DialogueManager: Loaded JSON dialogue: {json_data.DialogueId}");
+                }
             }
             catch (Exception e)
             {
@@ -123,235 +112,146 @@ namespace SRPI
             }
         }
 
-        private DialogueJson ParseDialogueJson(Godot.Collections.Dictionary data)
+        private void InitFirstDialogue(List<DialogueData> dialogues)
         {
-            var dialogue = new DialogueJson();
-
-            if (data.ContainsKey("dialogue_id"))
-                dialogue.DialogueId = data["dialogue_id"].AsString();
-            if (data.ContainsKey("start_node"))
-                dialogue.StartNode = data["start_node"].AsString();
-
-            if (data.ContainsKey("nodes"))
-            {
-                var nodesVariant = data["nodes"];
-                var nodesDict = (Godot.Collections.Dictionary)nodesVariant;
-                dialogue.Nodes = new Dictionary<string, DialogueNodeJson>();
-                foreach (var key in nodesDict.Keys)
-                {
-                    string nodeId = key.ToString();
-                    var nodeData = nodesDict[key];
-                    var nodeDict = (Godot.Collections.Dictionary)nodeData;
-
-                    var node = new DialogueNodeJson();
-                    if (nodeDict.ContainsKey("character"))
-                        node.Character = nodeDict["character"].AsString();
-                    if (nodeDict.ContainsKey("avatar"))
-                        node.Avatar = nodeDict["avatar"].AsString();
-                    if (nodeDict.ContainsKey("content"))
-                        node.Content = nodeDict["content"].AsString();
-                    if (nodeDict.ContainsKey("next"))
-                        node.Next = nodeDict["next"].AsString();
-
-                    if (nodeDict.ContainsKey("options"))
-                    {
-                        var optionsVariant = nodeDict["options"];
-                        var optionsArr = (Godot.Collections.Array)optionsVariant;
-                        node.Options = new List<DialogueOptionJson>();
-                        foreach (var opt in optionsArr)
-                        {
-                            var optDict = (Godot.Collections.Dictionary)opt;
-                            var option = new DialogueOptionJson();
-                            if (optDict.ContainsKey("text"))
-                                option.Text = optDict["text"].AsString();
-                            if (optDict.ContainsKey("opinion"))
-                                option.Opinion = optDict["opinion"].AsString();
-                            if (optDict.ContainsKey("next"))
-                                option.Next = optDict["next"].AsString();
-                            node.Options.Add(option);
-                        }
-                    }
-
-                    dialogue.Nodes[nodeId] = node;
-                }
-            }
-
-            return dialogue;
+            if (dialogues == null || dialogues.Count == 0) return;
+            current_dialogue = dialogues[0];
+            current_node_id = current_dialogue.StartNodeId;
         }
 
-        public void DisplayNextDialogue()
-        {
-            // JSON 模式
-            DisplayJsonDialogue();
-        }
+        public void DisplayNextDialogue() => DisplayJsonDialogue();
 
         private void DisplayJsonDialogue()
         {
-            if (json_data == null || json_data.Nodes == null || !json_data.Nodes.ContainsKey(current_node_id))
+            string speaker = "", avatar = "", content = "", next = "";
+            List<OptionData> options = null;
+
+            switch (current_format)
             {
-                GD.PrintErr($"DialogueManager: Invalid node: {current_node_id}");
-                Visible = false;
-                return;
+                case DataFormat.FiveLayer:
+                    var fiveLayerNode = five_layer_data?.Nodes?.Find(n => n.NodeId == current_node_id);
+                    if (fiveLayerNode == null) { Visible = false; return; }
+                    speaker = fiveLayerNode.Speaker;
+                    avatar = fiveLayerNode.Avatar;
+                    content = fiveLayerNode.Content;
+                    next = fiveLayerNode.NextNodeId ?? "";
+                    var fiveLayerOptions = five_layer_data?.Options?.FindAll(o => o.BranchNodeId == current_node_id);
+                    if (fiveLayerOptions?.Count > 0) options = fiveLayerOptions;
+                    break;
+
+                case DataFormat.Flat:
+                    int nodeIndex = ParseNodeIndex(current_node_id);
+                    if (nodeIndex >= 0 && flat_json_data?.DialogueNodes != null && nodeIndex < flat_json_data.DialogueNodes.Count)
+                    {
+                        var node = flat_json_data.DialogueNodes[nodeIndex];
+                        speaker = node.Character;
+                        avatar = node.Avatar;
+                        content = node.Content;
+                        next = node.Next ?? "";
+                        var nodeOptions = flat_json_data.DialogueOptions?.FindAll(o => o.NodeId == current_node_id);
+                        if (nodeOptions?.Count > 0)
+                            options = nodeOptions.ConvertAll(o => new OptionData { BranchNodeId = o.NodeId, Text = !string.IsNullOrEmpty(o.Opinion) ? o.Opinion : o.Text, NextNodeId = o.Next });
+                    }
+                    break;
+
+                case DataFormat.Old:
+                    if (json_data?.Nodes == null || !json_data.Nodes.ContainsKey(current_node_id)) { Visible = false; return; }
+                    var oldNode = json_data.Nodes[current_node_id];
+                    if (oldNode == null) { Visible = false; return; }
+                    speaker = oldNode.Character;
+                    avatar = oldNode.Avatar;
+                    content = oldNode.Content;
+                    next = oldNode.Next ?? "";
+                    break;
             }
 
-            var node = json_data.Nodes[current_node_id];
-            if (node == null)
-            {
-                Visible = false;
-                return;
-            }
-
-            // 设置角色名和头像
-            if (character_name_text != null)
-                character_name_text.Text = node.Character;
-
-            if (role_avatar != null && !string.IsNullOrEmpty(node.Avatar))
-            {
-                var avatarTexture = GD.Load<Texture2D>(node.Avatar);
-                role_avatar.Texture = avatarTexture;
-            }
-
-            // 显示文本内容
-            DisplayTextContent(node.Content);
-
-            // 处理选项
+            // 更新 UI
+            if (character_name_text != null) character_name_text.Text = speaker;
+            UpdateAvatar(avatar);
+            DisplayTextContent(content);
             ClearOptions();
-            if (node.Options != null && node.Options.Count > 0)
+            if (options != null && options.Count > 0) { has_options = true; CreateFiveLayerOptions(options); }
+        }
+
+        private void UpdateAvatar(string avatar)
+        {
+            if (role_avatar == null) return;
+            if (string.IsNullOrEmpty(avatar) || string.Equals(avatar, "NULL", StringComparison.OrdinalIgnoreCase))
+                role_avatar.Visible = false;
+            else
             {
-                has_options = true;
-                CreateOptions(node.Options);
+                var texture = GD.Load<Texture2D>(avatar);
+                if (texture != null) { role_avatar.Texture = texture; role_avatar.Visible = true; }
+                else { role_avatar.Visible = false; GD.PrintErr($"DialogueManager: Failed to load avatar: {avatar}"); }
             }
         }
 
         private void DisplayTextContent(string content)
         {
-            // Animate text typing effect
             if (text_box != null && text_box.IsInsideTree())
             {
                 text_box.Text = content;
                 text_box.VisibleRatio = 0.0f;
                 is_typing = true;
-
                 typing_tween?.Kill();
                 typing_tween = GetTree().CreateTween();
-
-                float duration = content.Length * 0.05f;
-                typing_tween.TweenProperty(text_box, "visible_ratio", 1.0f, duration);
+                typing_tween.TweenProperty(text_box, "visible_ratio", 1.0f, content.Length * 0.05f);
                 typing_tween.TweenCallback(Callable.From(() => { is_typing = false; }));
             }
             else if (RichTextBox != null && RichTextBox.IsInsideTree())
             {
                 RichTextBox.BbcodeEnabled = true;
-
-                // 检查内容是否包含格式标签
                 bool hasColorTag = content.Contains("[color=") || content.Contains("[colour=");
                 bool hasFontSizeTag = content.Contains("[font_size=");
-
-                // 如果没有格式标签，设置 RichTextLabel 的默认样式
-                if (!hasColorTag)
-                {
-                    RichTextBox.AddThemeColorOverride("default_color", default_text_color);
-                }
-                if (!hasFontSizeTag)
-                {
-                    RichTextBox.AddThemeFontSizeOverride("normal_font_size", default_font_size);
-                }
-
-                // 处理文本格式：仅添加缩进
-                string processedText = ProcessRichText(content);
-                RichTextBox.Text = processedText;
+                if (!hasColorTag) RichTextBox.AddThemeColorOverride("default_color", default_text_color);
+                if (!hasFontSizeTag) RichTextBox.AddThemeFontSizeOverride("normal_font_size", default_font_size);
+                RichTextBox.Text = ProcessRichText(content);
                 RichTextBox.VisibleRatio = 0.0f;
                 is_typing = true;
-
                 typing_tween?.Kill();
                 typing_tween = GetTree().CreateTween();
-
-                float duration = content.Length * 0.05f;
-                typing_tween.TweenProperty(RichTextBox, "visible_ratio", 1.0f, duration);
+                typing_tween.TweenProperty(RichTextBox, "visible_ratio", 1.0f, content.Length * 0.05f);
                 typing_tween.TweenCallback(Callable.From(() => { is_typing = false; }));
             }
             else
-            {
                 GD.PrintErr("DialogueManager: Neither text_box nor RichTextBox is in the scene tree");
-            }
         }
 
-        private void CreateOptions(List<DialogueOptionJson> options)
+        private void CreateFiveLayerOptions(List<OptionData> options)
         {
-            if (options_container == null)
-            {
-                GD.PrintErr("DialogueManager: options_container is null");
-                return;
-            }
-
-            // 设置按钮间距
-            if (options_container is VBoxContainer vbox)
-            {
-                vbox.AddThemeConstantOverride("separation", (int)option_button_spacing);
-            }
+            if (options_container == null) return;
+            if (options_container is VBoxContainer vbox) vbox.AddThemeConstantOverride("separation", (int)option_button_spacing);
 
             foreach (var option in options)
             {
-                Button btn;
-                if (option_button_scene != null)
-                {
-                    btn = option_button_scene.Instantiate<Button>();
-                }
-                else
-                {
-                    btn = new Button();
-                }
-
-                // 优先使用 Opinion 字段作为按钮文本，否则使用 Text 字段
-                string buttonText = !string.IsNullOrEmpty(option.Opinion) ? option.Opinion : option.Text;
-                btn.Text = buttonText;
-
-                // 设置按钮字体大小
-                if (option_button_font_size > 0)
-                {
-                    btn.AddThemeFontSizeOverride("font_size", option_button_font_size);
-                }
-
-                // 设置按钮字体
-                if (OptionButtonFont != null)
-                {
-                    btn.AddThemeFontOverride("font", OptionButtonFont);
-                }
-
-                // 设置按钮尺寸（无论是否使用预制体都生效）
-                btn.CustomMinimumSize = new Vector2(option_button_width, option_button_height);
-                // 设置按钮可以扩展
-                btn.SizeFlagsHorizontal = Control.SizeFlags.Expand | Control.SizeFlags.Fill;
-
-                // 使用 lambda 捕获 option.Next
-                string nextNode = option.Next;
-                btn.Pressed += () => OnOptionSelected(nextNode);
+                var btn = CreateOptionButton(option.Text, option.NextNodeId);
                 options_container.AddChild(btn);
             }
+        }
+
+        private Button CreateOptionButton(string text, string nextNodeId)
+        {
+            Button btn = option_button_scene?.Instantiate<Button>() ?? new Button();
+            btn.Text = text;
+            if (option_button_font_size > 0) btn.AddThemeFontSizeOverride("font_size", option_button_font_size);
+            if (OptionButtonFont != null) btn.AddThemeFontOverride("font", OptionButtonFont);
+            btn.CustomMinimumSize = new Vector2(option_button_width, option_button_height);
+            btn.SizeFlagsHorizontal = Control.SizeFlags.Expand | Control.SizeFlags.Fill;
+            string next = nextNodeId;
+            btn.Pressed += () => OnOptionSelected(next);
+            return btn;
         }
 
         private void ClearOptions()
         {
             if (options_container == null) return;
-
             foreach (var child in options_container.GetChildren())
-            {
-                if (child is Button btn)
-                {
-                    btn.QueueFree();
-                }
-            }
+                if (child is Button btn) btn.QueueFree();
         }
 
         private void OnOptionSelected(string nextNodeId)
         {
-            if (string.IsNullOrEmpty(nextNodeId))
-            {
-                // 结束对话
-                Visible = false;
-                return;
-            }
-
+            if (string.IsNullOrEmpty(nextNodeId)) { Visible = false; return; }
             current_node_id = nextNodeId;
             has_options = false;
             DisplayNextDialogue();
@@ -359,48 +259,54 @@ namespace SRPI
 
         public override void _Input(InputEvent @event)
         {
-            if (@event is InputEventMouseButton mouseEvent)
+            if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
             {
-                if (mouseEvent.Pressed && mouseEvent.ButtonIndex == MouseButton.Left)
+                if (has_options) return;
+                if (is_typing)
                 {
-                    // 有选项时，点击不推进对话
-                    if (has_options) return;
-
-                    if (is_typing)
-                    {
-                        typing_tween?.Kill();
-                        if (text_box != null)
-                            text_box.VisibleRatio = 1.0f;
-                        else if (RichTextBox != null)
-                            RichTextBox.VisibleRatio = 1.0f;
-                        is_typing = false;
-                    }
-                    else
-                    {
-                        // JSON 模式：通过 next 字段跳转
-                        if (json_data != null && json_data.Nodes.ContainsKey(current_node_id))
-                        {
-                            var node = json_data.Nodes[current_node_id];
-                            if (!string.IsNullOrEmpty(node.Next))
-                            {
-                                current_node_id = node.Next;
-                                DisplayNextDialogue();
-                            }
-                            else
-                            {
-                                Visible = false;
-                            }
-                        }
-                    }
+                    typing_tween?.Kill();
+                    if (text_box != null) text_box.VisibleRatio = 1.0f;
+                    else if (RichTextBox != null) RichTextBox.VisibleRatio = 1.0f;
+                    is_typing = false;
+                }
+                else
+                {
+                    string nextNode = GetCurrentNodeNext();
+                    if (!string.IsNullOrEmpty(nextNode)) { current_node_id = nextNode; DisplayNextDialogue(); }
+                    else Visible = false;
                 }
             }
         }
 
-        private static string ProcessRichText(string content)
+        private string GetCurrentNodeNext()
         {
-            // 添加缩进（使用空格）
-            string indent = new(' ', 4); // 4个英文字母 ≈ 2个汉字宽度
-            return $"{indent}{content}";
+            switch (current_format)
+            {
+                case DataFormat.FiveLayer:
+                    var node1 = five_layer_data?.Nodes?.Find(n => n.NodeId == current_node_id);
+                    return node1?.NextNodeId ?? "";
+
+                case DataFormat.Flat:
+                    int idx = ParseNodeIndex(current_node_id);
+                    if (idx >= 0 && flat_json_data?.DialogueNodes != null && idx < flat_json_data.DialogueNodes.Count)
+                        return flat_json_data.DialogueNodes[idx].Next ?? "";
+                    break;
+
+                case DataFormat.Old:
+                    if (json_data?.Nodes?.ContainsKey(current_node_id) == true)
+                        return json_data.Nodes[current_node_id].Next ?? "";
+                    break;
+            }
+            return "";
         }
+
+        private static int ParseNodeIndex(string nodeId)
+        {
+            if (nodeId.StartsWith("node_") && int.TryParse(nodeId.Replace("node_", ""), out int idx))
+                return idx - 1;
+            return 0;
+        }
+
+        private static string ProcessRichText(string content) => $"    {content}";
     }
 }
